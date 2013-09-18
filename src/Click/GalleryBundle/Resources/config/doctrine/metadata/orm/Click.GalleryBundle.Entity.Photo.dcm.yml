@@ -1,0 +1,25 @@
+Click\GalleryBundle\Entity\Photo:
+    type: entity
+    table: photo
+    repositoryClass: Click\GalleryBundle\Entity\PhotoRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: IDENTITY
+        name:
+            type: string
+            length: 255
+            unique: true
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+    manyToOne:
+        gallery:
+            targetEntity: Gallery
+            inversedBy: photos
+    lifecycleCallbacks:
+        prePersist: [ touchCreated ]
+        preUpdate: [ touchUpdated ]

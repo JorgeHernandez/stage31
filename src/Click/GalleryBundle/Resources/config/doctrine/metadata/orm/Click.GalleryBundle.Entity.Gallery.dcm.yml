@@ -1,0 +1,31 @@
+Click\GalleryBundle\Entity\Gallery:
+    type: entity
+    table: gallery
+    repositoryClass: Click\GalleryBundle\Entity\GalleryRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: IDENTITY
+        url:
+            type: string
+            length: 255
+            unique: true
+        name:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 400
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+    oneToMany:
+        photos:
+          targetEntity: Photo
+          mappedBy: gallery
+    lifecycleCallbacks:
+        prePersist: [ touchCreated ]
+        preUpdate: [ touchUpdated ]
